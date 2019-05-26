@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>将模版分离</title>
+    <link rel="stylesheet" href="assets/common/antd-v1.3.8.min.css">
+
+    <script src="assets/common/vue-v2.6.10.min.js"></script>
+    <script src="assets/common/moment-v2.24.0.min.js"></script>
+    <script src="assets/common/antd-v1.3.8.min.js"></script>
+
+    <script src="assets/common/require-v2.3.6.min.js"></script>
+
+    <script>
+        Vue.use(antd);
+        requirejs && requirejs.config({
+            baseUrl: './assets',
+            paths: { 'vue': 'common/require-vue' },
+            config: { 'vue': { 'css': 'inject', 'templateVar': '__template__' } }
+        });
+    </script>
+</head>
+<body>
+
+    <div id="app">
+        <a-layout>
+            <a-layout-header id="header"></a-layout-header>
+
+            <a-layout-content>
+                <a-row type="flex">
+                    <a-col id="navbar" :span="4"></a-col>
+                    <a-col id="main" :span="14"></a-col>
+                    <a-col id="sidebar" :span="6"></a-col>
+                </a-row>
+            </a-layout-content>
+
+            <a-layout-footer id="footer"></a-layout-footer>
+        </a-layout>
+    </div>
+
+    <script>
+        requirejs([
+            'vue!template/header.html',
+            'vue!template/footer.html',
+            'vue!template/navbar.html',
+            'vue!template/sidebar.html',
+            'vue!template/carousel.html',
+            'vue!template/feed.html',
+        ], function (header, footer, navbar, sidebar, carousel, feed) {
+
+            var appInst = new Vue({ el: '#app' });
+
+            var headerInst = new Vue({ el: '#header' });
+            header.$mount();
+            headerInst.$el.appendChild(header.$el);
+
+            var footerInst = new Vue({ el: '#footer' });
+            footer.$mount();
+            footerInst.$el.appendChild(footer.$el);
+
+            var navbarInst = new Vue({ el: '#navbar' });
+            navbar.$mount();
+            navbarInst.$el.appendChild(navbar.$el);
+
+            var sidebarInst = new Vue({ el: '#sidebar' });
+            sidebar.$mount();
+            sidebarInst.$el.appendChild(sidebar.$el);
+
+            var mainInst = new Vue({ el: '#main' });
+            carousel.$mount();
+            mainInst.$el.appendChild(carousel.$el);
+            feed.$mount();
+            mainInst.$el.appendChild(feed.$el);
+        });
+    </script>
+</body>
+</html>

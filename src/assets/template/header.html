@@ -1,0 +1,40 @@
+<script>
+define([], function() {
+    return new Vue({
+        template: __template__,
+        data() {
+            return {}
+        },
+        mounted() {},
+        methods: {},
+    })
+});
+</script>
+
+<style>
+#header{height:50px;background:#fff;border-bottom:1px solid #eceef1}#header-nav{float:left;height:50px}#header-search{float:right;width:180px;margin:4px}#header-button{float:right;height:50px;overflow:hidden;line-height:50px}#has-team-news{top:-7px;left:-3px}.logo{width:120px;height:100%;line-height:50px;font-weight:bold;background:rgba(255, 255, 255, .2);float:left}
+</style>
+
+<template>
+    <div>
+        <div class="logo">博客Logo摆放</div>
+        <a-menu mode="horizontal" :defaultSelectedKeys="['1']" id="header-nav">
+           <a-menu-item key="1">
+              首页
+           </a-menu-item>
+           <a-menu-item key="2">
+              团队
+              <a-badge id="has-team-news" status="success"></a-badge>
+           </a-menu-item>
+           <a-menu-item key="3">
+              标签
+           </a-menu-item>
+        </a-menu>
+        <a-button-group id="header-button">
+           <a-button icon="file-text"></a-button>
+           <a-button icon="star"></a-button>
+           <a-button icon="user"></a-button>
+        </a-button-group>
+        <a-input-search id="header-search" placeholder="你不知道啥？问我鸭"></a-input-search>
+     </div>
+</template>

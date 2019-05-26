@@ -1,0 +1,10 @@
+version: '3.6'
+
+services:
+
+  nginx:
+    image: nginx:1.15.8-alpine
+    ports:
+      - 10240:80
+    volumes:
+      - ./src:/usr/share/nginx/html

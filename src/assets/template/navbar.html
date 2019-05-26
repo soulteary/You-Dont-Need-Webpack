@@ -1,0 +1,107 @@
+<script>
+define([], function() {
+    return new Vue({
+        template: __template__,
+        data() {
+            return {
+                rootSubmenuKeys: ['sub0', 'sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6'],
+                openKeys: ['sub0'],
+            }
+        },
+        mounted() {},
+        methods: {
+            onMenuOpenChange(openKeys) {
+                const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
+                if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+                    this.openKeys = openKeys
+                } else {
+                    this.openKeys = latestOpenKey ? [latestOpenKey] : []
+                }
+            },
+        },
+    })
+});
+</script>
+
+<style>
+#tag-list .ant-tag{margin-bottom:8px}.item-people{margin:10px 0}#ranking .ant-tabs-top-bar{margin-bottom:0}#car-list,#cars-list{border-top:none}
+</style>
+
+<template>
+    <div id="left-menu-wrap">
+        <a-menu id="left-menu" mode="inline" :openKeys="openKeys" @openChange="onMenuOpenChange">
+            <a-sub-menu key="sub0">
+                <span slot="title">
+                    <a-icon type="home"></a-icon>
+                    <span>推荐</span>
+                </span>
+                <a-menu-item key="1">牛逼的比赛</a-menu-item>
+                <a-menu-item key="2">犀利的观点</a-menu-item>
+                <a-menu-item key="3">给力的事件</a-menu-item>
+                <a-menu-item key="4">特别的曝光</a-menu-item>
+            </a-sub-menu>
+            <a-sub-menu key="sub1">
+                <span slot="title">
+                    <a-icon type="html5"></a-icon>
+                    <span>前端</span>
+                </span>
+                <a-menu-item key="1">最佳实践</a-menu-item>
+                <a-menu-item key="2">基础知识</a-menu-item>
+                <a-menu-item key="3">多彩样式</a-menu-item>
+                <a-menu-item key="4">有趣脚本</a-menu-item>
+            </a-sub-menu>
+            <a-sub-menu key="sub2">
+                <span slot="title">
+                    <a-icon type="codepen"></a-icon>
+                    <span>后端</span>
+                </span>
+                <a-menu-item key="5">Option 5</a-menu-item>
+                <a-menu-item key="6">Option 6</a-menu-item>
+                <a-sub-menu key="sub3" title="Submenu">
+                    <a-menu-item key="7">Option 7</a-menu-item>
+                    <a-menu-item key="8">Option 8</a-menu-item>
+                </a-sub-menu>
+            </a-sub-menu>
+            <a-sub-menu key="sub3">
+                <span slot="title">
+                    <a-icon type="appstore"></a-icon>
+                    <span>运维</span>
+                </span>
+                <a-menu-item key="9">Option 9</a-menu-item>
+                <a-menu-item key="10">Option 10</a-menu-item>
+                <a-menu-item key="11">Option 11</a-menu-item>
+                <a-menu-item key="12">Option 12</a-menu-item>
+            </a-sub-menu>
+            <a-sub-menu key="sub4">
+                <span slot="title">
+                    <a-icon type="html5"></a-icon>
+                    <span>算法</span>
+                </span>
+                <a-menu-item key="9">Option 9</a-menu-item>
+                <a-menu-item key="10">Option 10</a-menu-item>
+                <a-menu-item key="11">Option 11</a-menu-item>
+                <a-menu-item key="12">Option 12</a-menu-item>
+            </a-sub-menu>
+            <a-sub-menu key="sub5">
+                <span slot="title">
+                    <a-icon type="html5"></a-icon>
+                    <span>分类</span>
+                </span>
+                <a-menu-item key="9">Option 9</a-menu-item>
+                <a-menu-item key="10">Option 10</a-menu-item>
+                <a-menu-item key="11">Option 11</a-menu-item>
+                <a-menu-item key="12">Option 12</a-menu-item>
+            </a-sub-menu>
+            <a-sub-menu key="sub6">
+                <span slot="title">
+                    <a-icon type="html5"></a-icon>
+                    <span>分类</span>
+                </span>
+                <a-menu-item key="9">Option 9</a-menu-item>
+                <a-menu-item key="10">Option 10</a-menu-item>
+                <a-menu-item key="11">Option 11</a-menu-item>
+                <a-menu-item key="12">Option 12</a-menu-item>
+            </a-sub-menu>
+        </a-menu>
+    </div>
+</template>

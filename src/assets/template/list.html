@@ -1,0 +1,78 @@
+<script>
+
+define([], function() {
+
+const columns=[{dataIndex:"title",key:"title",title:"标题",slots:{title:"customTitle"},scopedSlots:{customRender:"name"}},{title:"分类",dataIndex:"category",key:"category"},{title:"日期",dataIndex:"date",key:"date"},{title:"标签",key:"tags",dataIndex:"tags",scopedSlots:{customRender:"tags"}},{title:"操作",key:"action",scopedSlots:{customRender:"action"}}];
+const data=[{key:"1",title:"这是一个文章标题",category:"前端",date:"2019.12.12",tags:["工具链","框架"]},{key:"2",title:"这是另外一个文章标题",category:"算法",date:"2019.12.13",tags:["寻路"]},{key:"3",title:"这是又一个文章标题",category:"系统",date:"2019.12.14",tags:["性能优化","最佳实践"]}];
+
+return new Vue({
+    template: __template__,
+    data() {
+        return {
+            data,
+            columns,
+        };
+    },
+    methods: {
+        callback(key) {
+            console.log(key)
+        },
+    },
+})
+});
+</script>
+
+<style>
+#left-menu{margin-top:10px}#left-menu-wrap{padding-left:10px;margin-left:10px}#main{background:#fff;border-radius:4px;margin:40px 10px}#title{font-size:24px;text-align:center;line-height:24px;margin:20px 0 0 0}
+</style>
+
+<template>
+    <a-tabs defaultActiveKey="1" @change="callback">
+        <a-tab-pane tab="待审核" key="1">
+           <a-table :columns="columns" :dataSource="data">
+              <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>
+              <span slot="customTitle">
+                 <a-icon type="smile-o" />
+                 Name
+              </span>
+              <span slot="tags" slot-scope="tags">
+                 <a-tag v-for="tag in tags" color="blue" :key="tag">{{tag}}</a-tag>
+              </span>
+              <span slot="action" slot-scope="text, record">
+                 <a href="javascript:;">通过</a>
+                 <a-divider type="vertical" />
+                 <a href="javascript:;">驳回</a>
+                 <a-divider type="vertical" />
+                 <a href="javascript:;" class="ant-dropdown-link">
+                    更多操作
+                    <a-icon type="down" />
+                 </a>
+              </span>
+           </a-table>
+        </a-tab-pane>
+        <a-tab-pane tab="已审核" key="2">
+           <a-table :columns="columns" :dataSource="data">
+              <a slot="name" slot-scope="text" href="javascript:;">{{text}}</a>
+              <span slot="customTitle">
+                 <a-icon type="smile-o" />
+                 Name
+              </span>
+              <span slot="tags" slot-scope="tags">
+                 <a-tag v-for="tag in tags" color="blue" :key="tag">{{tag}}</a-tag>
+              </span>
+              <span slot="action" slot-scope="text, record">
+                 <a href="javascript:;">通过</a>
+                 <a-divider type="vertical" />
+                 <a href="javascript:;">驳回</a>
+                 <a-divider type="vertical" />
+                 <a href="javascript:;" class="ant-dropdown-link">
+                    更多操作
+                    <a-icon type="down" />
+                 </a>
+              </span>
+           </a-table>
+        </a-tab-pane>
+        <a-tab-pane tab="审核日志" key="3">
+        </a-tab-pane>
+     </a-tabs>
+</template>

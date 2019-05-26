@@ -1,0 +1,142 @@
+<script>
+define([], function() {
+    const posts = [{ "gender": "male", "name": { "title": "mr", "first": "umut", "last": "adıvar" }, "email": "umut.adıvar@example.com", "nat": "TR" }, { "gender": "male", "name": { "title": "mr", "first": "michel", "last": "bekhuis" }, "email": "michel.bekhuis@example.com", "nat": "NL" }, { "gender": "male", "name": { "title": "mr", "first": "mathijn", "last": "edens" }, "email": "mathijn.edens@example.com", "nat": "NL" }, { "gender": "male", "name": { "title": "monsieur", "first": "maximilian", "last": "lambert" }, "email": "maximilian.lambert@example.com", "nat": "CH" }, { "gender": "male", "name": { "title": "mr", "first": "john", "last": "herrera" }, "email": "john.herrera@example.com", "nat": "US" }]
+
+    return new Vue({
+        template: __template__,
+        data() {
+            return {
+                rootSubmenuKeys: ['sub0', 'sub1', 'sub2', 'sub3', 'sub4', 'sub5', 'sub6'],
+                openKeys: ['sub0'],
+
+                loading: true,
+                loadingMore: false,
+                showLoadingMore: true,
+                data: posts,
+
+                pagination: {
+                    onChange: (page) => {
+                        console.log('Change Page', page);
+                    },
+                    pageSize: 3,
+                },
+
+            }
+        },
+        mounted() {
+            this.getData((res) => {
+                this.loading = false
+                this.data = res
+            })
+        },
+        methods: {
+            onMenuOpenChange(openKeys) {
+                const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
+                if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+                    this.openKeys = openKeys
+                } else {
+                    this.openKeys = latestOpenKey ? [latestOpenKey] : []
+                }
+            },
+
+            handleButtonClick(e) {
+                console.log('Button Clicked', e);
+            },
+            handleTopMenuClick(e) {
+                console.log('Top Menu Clicked', e);
+            },
+
+            getData(callback) {
+                setTimeout(() => {
+                    callback(posts)
+                }, 300)
+            },
+            onLoadMore() {
+                this.loadingMore = true
+                this.getData((res) => {
+                    this.data = this.data.concat(res)
+                    this.loadingMore = false
+                    this.$nextTick(() => {
+                        window.dispatchEvent(new Event('resize'))
+                    })
+                })
+            },
+
+        },
+    })
+});
+</script>
+
+<style>
+#top-switch{margin-top:10px;overflow:hidden}#top-switch-2{float:right;overflow:hidden;width:100px;height:20px;line-height:20px;margin-top:10px}#top-switch-2 a{font-size:12px}#top-switch-2 a.grey{color:gray}#top-divider{margin:10px}#post-container{margin:10px}.demo-loadmore-list{min-height:350px}.post-meta{display:inline-block;font-size:13px;line-height:13px;height:13px;overflow:hidden;font-style:italic;margin-right:4px}.desc{margin:14px 0;font-size:16px}
+</style>
+
+<template>
+    <div>
+       <div id="top-switch">
+          <a-dropdown>
+             <a-menu slot="overlay" @click="handleTopMenuClick">
+                <a-menu-item key="1">
+                   <a-icon type="user"></a-icon>
+                   编辑精选
+                </a-menu-item>
+                <a-menu-item key="2">
+                   <a-icon type="user"></a-icon>
+                   最新发布
+                </a-menu-item>
+             </a-menu>
+             <a-button style="margin-left: 8px">
+                编辑精选
+                <a-icon type="down"></a-icon>
+             </a-button>
+          </a-dropdown>
+          <div id="top-switch-2">
+             <a href="#">热门</a>
+             <a-divider type="vertical"></a-divider>
+             <a href="#" class="grey">最新</a>
+          </div>
+          <a-divider id="top-divider"></a-divider>
+       </div>
+       <div id="post-container">
+          <a-list class="demo-loadmore-list" :loading="loading" itemLayout="horizontal" :dataSource="data">
+             <div v-if="showLoadingMore" slot="loadMore"
+                :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
+                <a-spin v-if="loadingMore" />
+                <a-button v-else @click="onLoadMore">阅读更多</a-button>
+             </div>
+             <a-list-item style="width:100%" slot="renderItem" slot-scope="item, index">
+                <a-card style="width:100%">
+                   <h2>这是一篇博客的标题，可能很长很长很长很长</h2>
+                   <div class="post-meta">
+                      <a-icon type="user"></a-icon>
+                      @nickname
+                   </div>
+                   <div class="post-meta">
+                      <a-icon type="clock-circle"></a-icon>
+                      10分钟前
+                   </div>
+                   <p class="desc">
+                      简单的内容描述。
+                   </p>
+                   <div style="float:left">
+                      <a-tag>前端</a-tag>
+                      <a-tag>工程工具</a-tag>
+                      <a-tag>方法论</a-tag>
+                   </div>
+                   <div class="post-meta" style="float:right">
+                      <span>
+                         <a-icon type="like" style="margin-right: 8px"></a-icon>
+                      </span>
+                      <span>
+                         <a-icon type="star" style="margin-right: 8px"></a-icon>
+                      </span>
+                      <span>
+                         <a-icon type="message" style="margin-right: 8px"></a-icon>
+                      </span>
+                   </div>
+                </a-card>
+             </a-list-item>
+          </a-list>
+       </div>
+    </div>
+</template>

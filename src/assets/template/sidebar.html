@@ -1,0 +1,112 @@
+<script>
+define([], function() {
+    return new Vue({
+        template: __template__,
+        data() {
+            return {}
+        },
+        methods: {
+
+        },
+    })
+});
+</script>
+
+<style>
+#left-menu{margin-top:10px}#left-menu-wrap{padding-left:10px;margin-left:10px}
+</style>
+
+<template>
+    <div>
+        <a-card style="margin: 10px; border-color: #42b983;">
+            <h3 style="color:#42b983">
+                <a-icon type="notification" style="margin-right: 8px"></a-icon>
+                这里是一个公告标题
+            </h3>
+            <p>这里有一个描述性词汇描述性词汇描述性词汇描述性词汇描述性词汇</p>
+            <a-button style="width:100%;background:#42b983;border-color: #42b983;color: #fff;">开始浏览
+            </a-button>
+            </a-card>
+            <a-card id="tag-list" style="margin: 10px;">
+            <h3>
+                <a-icon type="tag" style="margin-right: 8px"></a-icon>
+                热门标签
+            </h3>
+            <a-divider></a-divider>
+            <a-tag>前端</a-tag>
+            <a-tag>工程工具</a-tag>
+            <a-tag>方法论</a-tag>
+            <a-tag>工程工具</a-tag>
+            <a-tag>方法论</a-tag>
+            <a-tag>前端</a-tag>
+            <a-tag>方法论</a-tag>
+            <a-tag>工程工具</a-tag>
+            <a-tag>方法论</a-tag>
+            <a-tag>前端</a-tag>
+            </a-card>
+            <a-tabs defaultActiveKey="2" style="margin: 10px;" type="card" id="ranking">
+            <a-tab-pane tab="月度优秀作者" key="1">
+                <a-card id="car-list">
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">1</a-avatar>
+                        <a href="#">作者 - 简单描述</a>
+                        <a-badge style="zoom:0.8" count="12"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">2</a-avatar>
+                        <a href="#">作者 - 简单描述</a>
+                        <a-badge style="zoom:0.8" count="10"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">1</a-avatar>
+                        <a href="#">作者 - 简单描述</a>
+                        <a-badge style="zoom:0.8" count="9"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">4</a-avatar>
+                        <a href="#">作者 - 简单描述</a>
+                        <a-badge style="zoom:0.8" count="7"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">5</a-avatar>
+                        <a href="#">作者 - 简单描述</a>
+                        <a-badge style="zoom:0.8" count="6"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">6</a-avatar>
+                        <a href="#">作者 - 简单描述</a>
+                        <a-badge style="zoom:0.8" count="2"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                </a-card>
+            </a-tab-pane>
+            <a-tab-pane tab="月度优秀作者" key="2">
+                <a-card id="cars-list">
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">1</a-avatar>
+                        <a href="#">作者</a>
+                        <a-badge style="zoom:0.8" count="109"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">1</a-avatar>
+                        <a href="#">作者</a>
+                        <a-badge style="zoom:0.8" count="109"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                    <div class="item-people">
+                        <a-avatar style="margin-right:4px">1</a-avatar>
+                        <a href="#">作者</a>
+                        <a-badge style="zoom:0.8" count="109"
+                        :numberStyle="{backgroundColor: '#8bc34a'} " />
+                    </div>
+                </a-card>
+            </a-tab-pane>
+        </a-tabs>
+    </div>
+ </template>
